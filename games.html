@@ -4,20 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jogos - Avaliações</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
   <header>
-    <a href="../index.html">← Voltar</a>
+    <a href="index.html">← Voltar</a>
     <h1>Jogos</h1>
   </header>
   <main id="content">
     <p>Carregando avaliações de jogos...</p>
   </main>
-  <script type="module" src="../assets/js/app.js"></script>
+  <script type="module" src="assets/js/app.js"></script>
   <script type="module">
-    // Specific page logic
-    import { fetchReviews } from '../assets/js/app.js';
+    import { fetchReviews } from 'assets/js/app.js';
     const content = document.getElementById('content');
     async function load() {
       try {
