@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leitura - Avaliações</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header>
+    <a href="../index.html">← Voltar</a>
+    <h1>Leitura</h1>
+  </header>
+  <main id="content">
+    <p>Carregando avaliações de leitura...</p>
+  </main>
+  <script type="module" src="../assets/js/app.js"></script>
+  <script type="module">
+    import { fetchReviews } from '../assets/js/app.js';
+    const content = document.getElementById('content');
+    async function load() {
+      try {
+        const reviews = await fetchReviews('reading');
+        content.innerHTML = '';
+        if (reviews.length === 0) {
+          content.innerHTML = '<p>Nenhuma avaliação encontrada.</p>';
+          return;
+        }
+        const ul = document.createElement('ul');
+        reviews.forEach(r => {
+          const li = document.createElement('li');
+          li.innerHTML = `<strong>${r.title}</strong> - ${r.rating}★<br>${r.comment}`;
+          ul.appendChild(li);
+        });
+        content.appendChild(ul);
+      } catch (e) {
+        content.innerHTML = `<p>Erro ao carregar avaliações: ${e.message}</p>`;
+      }
+    }
+    load();
+  </script>
+</body>
+</html>
