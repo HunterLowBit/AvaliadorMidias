@@ -11,3 +11,9 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+.bat/
+
+gitupdate.bat
+
+exec.bat

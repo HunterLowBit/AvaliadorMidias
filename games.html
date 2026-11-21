@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jogos - Avaliações</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
   <header>
     <a href="index.html">← Voltar</a>
     <h1>Jogos</h1>
+    <a href="games_create.html" class="button">Criar Avaliação</a>
   </header>
   <main id="content">
     <p>Carregando avaliações de jogos...</p>
   </main>
   <script type="module" src="assets/js/app.js"></script>
   <script type="module">
-    import { fetchReviews } from './assets/js/app.js';
+    import { fetchGames } from './assets/js/app.js';
     const content = document.getElementById('content');
     async function load() {
       try {
-        const reviews = await fetchReviews('games');
+        const games = await fetchGames();
         content.innerHTML = '';
-        if (reviews.length === 0) {
+        if (games.length === 0) {
           content.innerHTML = '<p>Nenhuma avaliação encontrada.</p>';
           return;
         }
         const ul = document.createElement('ul');
-        reviews.forEach(r => {
+        games.forEach(g => {
           const li = document.createElement('li');
-          li.innerHTML = `<strong>${r.title}</strong> - ${r.rating}★<br>${r.comment}`;
+          li.innerHTML = `<strong>${g.nome}</strong> (${g.ano}) - ${g.media}★<br>${g.obs}`;
           ul.appendChild(li);
         });
         content.appendChild(ul);
@@ -40,4 +43,5 @@
     load();
   </script>
 </body>
+
 </html>

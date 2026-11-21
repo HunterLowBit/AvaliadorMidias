@@ -1,37 +1,38 @@
-// series.html – rendering logic (complete rewrite)
-
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Séries - Avaliações</title>
+  <title>Episódicas - Avaliações</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
   <header>
     <a href="index.html">← Voltar</a>
-    <h1>Séries</h1>
+    <h1>Episódicas (Animes, Séries, Desenhos)</h1>
+    <a href="episodicas_create.html" class="button">Criar Avaliação</a>
   </header>
   <main id="content">
-    <p>Carregando avaliações de séries...</p>
+    <p>Carregando avaliações de episódios...</p>
   </main>
   <script type="module" src="assets/js/app.js"></script>
   <script type="module">
-    import { fetchReviews } from './assets/js/app.js';
+    import { fetchEpisodicas } from './assets/js/app.js';
     const content = document.getElementById('content');
     async function load() {
       try {
-        const reviews = await fetchReviews('series');
+        const series = await fetchEpisodicas();
         content.innerHTML = '';
-        if (reviews.length === 0) {
+        if (series.length === 0) {
           content.innerHTML = '<p>Nenhuma avaliação encontrada.</p>';
           return;
         }
         const ul = document.createElement('ul');
-        reviews.forEach(r => {
+        series.forEach(s => {
           const li = document.createElement('li');
-          li.innerHTML = `<strong>${r.nome}</strong> (${r.ano}) - ${r.estetica}★<br>${r.obs}`;
+          li.innerHTML = `<strong>${s.nome}</strong> (${s.ano}) - ${s.media}★<br>${s.obs}`;
           ul.appendChild(li);
         });
         content.appendChild(ul);
@@ -42,4 +43,5 @@
     load();
   </script>
 </body>
+
 </html>

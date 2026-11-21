@@ -2,12 +2,14 @@
 // index.html
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Avaliações de Conteúdos</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
   <header>
     <h1>Avaliações de Conteúdos</h1>
@@ -15,16 +17,56 @@
       <ul>
         <li><a href="games.html">Jogos</a></li>
         <li><a href="movies.html">Filmes</a></li>
-        <li><a href="series.html">Séries</a></li>
-        <li><a href="anime.html">Animes</a></li>
+        <li><a href="episodicas.html">Episódicas</a></li>
         <li><a href="reading.html">Leitura</a></li>
-        <li><a href="create.html">Adicionar Avaliação</a></li>
+        <li><a href="admin.html">ADM Login</a></li>
       </ul>
     </nav>
   </header>
   <main>
-    <p>Bem-vindo ao portal de avaliações. Selecione uma categoria.</p>
+    <div id="content"></div>
   </main>
   <script type="module" src="assets/js/app.js"></script>
+<script type="module">
+import { fetchLastFive } from './assets/js/app.js';
+const categories = [
+  {name:'Jogos', table:'games'},
+  {name:'Leitura', table:'reading'},
+  {name:'Episódicas', table:'episodicas'},
+  {name:'Filmes', table:'reviews'}
+];
+async function load() {
+  const content=document.getElementById('content');
+  for(const cat of categories){
+    const items=await fetchLastFive(cat.table);
+    const section=document.createElement('section');
+    section.style.marginBottom='2em';
+    const h2=document.createElement('h2');
+    h2.textContent=cat.name;
+    section.appendChild(h2);
+    if(items.length===0){
+      section.appendChild(document.createTextNode('Nenhuma avaliação encontrada.'));
+    } else {
+      const ul=document.createElement('ul');
+      items.forEach(item=>{
+        const li=document.createElement('li');
+        let text='';
+        if(cat.table==='reading'){
+          text=`<strong>${item.nome}</strong> – ${item.autor} (${item.ano_leitura}) ${item.historia}★<br>${item.obs}`;
+        } else {
+          text=`<strong>${item.nome}</strong> (${item.ano}) ${item.media}★<br>${item.obs}`;
+        }
+        li.innerHTML=text;
+        ul.appendChild(li);
+      });
+      section.appendChild(ul);
+    }
+    content.appendChild(section);
+  }
+}
+load();
+</script>
+
 </body>
+
 </html>

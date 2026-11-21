@@ -1,5 +1,5 @@
-// reading.html – rendering logic (complete rewrite)
 
+// reading.html – list readings
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -11,27 +11,28 @@
 <body>
   <header>
     <a href="index.html">← Voltar</a>
-    <h1>Leitura</h1>
+    <h1>Leitura (Livros)</h1>
+    <a href="reading_create.html" class="button">Criar Avaliação</a>
   </header>
   <main id="content">
     <p>Carregando avaliações de leitura...</p>
   </main>
   <script type="module" src="assets/js/app.js"></script>
   <script type="module">
-    import { fetchReviews } from './assets/js/app.js';
+    import { fetchreadings } from './assets/js/app.js';
     const content = document.getElementById('content');
     async function load() {
       try {
-        const reviews = await fetchReviews('reading');
+        const readings = await fetchreadings('reading');
         content.innerHTML = '';
-        if (reviews.length === 0) {
+        if (readings.length === 0) {
           content.innerHTML = '<p>Nenhuma avaliação encontrada.</p>';
           return;
         }
         const ul = document.createElement('ul');
-        reviews.forEach(r => {
+        readings.forEach(r => {
           const li = document.createElement('li');
-          li.innerHTML = `<strong>${r.nome}</strong> (${r.ano}) - ${r.estetica}★<br>${r.obs}`;
+          li.innerHTML = `<strong>${r.nome}</strong> – ${r.autor} (${r.ano_leitura})\n${r.historia}★ <br>${r.obs}`;
           ul.appendChild(li);
         });
         content.appendChild(ul);

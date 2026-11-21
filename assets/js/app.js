@@ -9,10 +9,17 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 export async function fetchReviews(category) {
   const { data, error } = await supabase
     .from("reviews")
-    .select(
-      "id, nome, ano, idioma_assistido, assistido_em, grafico_animacao, estetica, som_efeito_sonoro, vozes, apresentacao, roteiro_historia, personagens, ambiente, media, obs"
-    )
+    .select("*")
     .eq("category", category)
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+  return data || [];
+}
+
+export async function fetchreadings(category) {
+  const { data, error } = await supabase
+    .from(category)
+    .select("*")
     .order("created_at", { ascending: false });
   if (error) throw error;
   return data || [];
@@ -38,19 +45,42 @@ function normalizeReview(review) {
 }
 
 export async function addReview(review) {
-  const payload = normalizeReview(review);
+
+// Existing addReview implementation
+
   const { data, error } = await supabase
     .from("reviews")
-    .insert([payload])
+    .insert([review])
     .single();
   if (error) throw error;
   return data;
 }
 
-export async function addComment(reviewId, commentText) {
+
+
+export async function fetchLastFive(category) {
   const { data, error } = await supabase
-    .from("comments")
-    .insert({ review_id: reviewId, comment: commentText })
+    .from(category)
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(5);
+  if (error) throw error;
+  return data || [];
+}
+
+export async function fetchGames() {
+  const { data, error } = await supabase
+    .from("games")
+    .select("*")
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+  return data || [];
+}
+
+export async function addReadingReview(review) {
+  const { data, error } = await supabase
+    .from("reading")
+    .insert([review])
     .single();
   if (error) throw error;
   return data;

@@ -1,29 +1,21 @@
-# create.html
-// Full form for creating a review
-
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adicionar Avaliação</title>
+  <title>Adicionar Avaliação – Filmes</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
   <header>
     <a href="index.html">← Voltar</a>
-    <h1>Adicionar Avaliação</h1>
+    <h1>Adicionar Avaliação – Filmes</h1>
   </header>
   <main>
     <form id="reviewForm">
-      <label for="category">Categoria:</label>
-      <select id="category" name="category" required>
-        <option value="games" selected>Jogos</option>
-        <option value="movies">Filmes</option>
-        <option value="series">Séries</option>
-        <option value="anime">Animes</option>
-        <option value="reading">Leitura</option>
-      </select>
+      <input type="hidden" name="category" value="movies" />
 
       <label for="nome">Nome:</label>
       <input type="text" id="nome" name="nome" required>
@@ -37,8 +29,8 @@
       <label for="assistido_em">Assistido em (ano):</label>
       <input type="number" id="assistido_em" name="assistido_em" required>
 
-      <label for="grafico_animacao">Gráfico / Animação:</label>
-      <input type="number" id="grafico_animacao" name="grafico_animacao" required>
+      <label for="grafico_animacao">Gráfico / Animação / Visual:</label>
+      <input type="number" id="grafico_animacao" name="grafico_animacao" min="0" max="10" required>
 
       <label for="estetica">Estética (0‑10):</label>
       <input type="number" id="estetica" name="estetica" min="0" max="10" required>
@@ -89,4 +81,5 @@
     });
   </script>
 </body>
+
 </html>

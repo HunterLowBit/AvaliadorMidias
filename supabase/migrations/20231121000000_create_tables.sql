@@ -14,7 +14,7 @@ CREATE TABLE reviews (
   grafico_animacao text,
   estetica int,
   som_efeito_sonoro int,
-  voces text,
+  vozes text,
   apresentacao int,
   roteiro_historia int,
   personagens int,
