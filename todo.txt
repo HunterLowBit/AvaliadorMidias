@@ -1,0 +1,40 @@
+# Checklist de ações realizadas
+
+## 1. Estrutura de arquivos criada
+- `index.html` – página inicial com links para as categorias.
+- `games.html`, `movies.html`, `series.html`, `anime.html`, `reading.html` – páginas de avaliação de cada tipo de mídia.
+- `assets/css/style.css` – estilo básico.
+- `assets/js/fields.js` – lista de campos exigidos pelo Regras1Assistidos.txt.
+- `assets/js/app.js` – integração com Supabase, fetch de reviews e adição de comentários.
+- `.gitignore` – padrão Git.
+- `README.md` – guia de uso.
+
+## 2. Ajustes de caminhos
+- Todos os arquivos `.html` foram atualizados para usar caminhos relativos a partir da raiz do repositório (sem `../`).
+
+## 3. Configuração de Supabase
+- `app.js` foi configurado com placeholders para `SUPABASE_URL` e `SUPABASE_ANON_KEY`.
+- Função `fetchReviews` agora seleciona todos os campos definidos em `Regras1Assistidos.txt`.
+- Função `addComment` permanece para inserir comentários.
+
+## 4. Guia de uso (README.md)
+- Instruções para publicar no GitHub Pages.
+- Orientação sobre criação das tabelas e regras RLS.
+- Lista de campos que devem existir nas tabelas `reviews` e `comments`.
+
+## 5. Supabase CLI (para executar depois)
+1. Instalar o CLI: `npm install -g supabase`
+2. Login: `supabase login --token <TOKEN>`
+3. Inicializar projeto local: `supabase init`
+4. Linkar ao projeto remoto: `supabase link --project-ref fovwfkujgjuooijwqcvm`
+5. Depois, use `supabase db push`, `supabase functions deploy`, etc.
+
+## Próximos passos
+- Crie as tabelas `reviews` e `comments` no Supabase.
+- Configure regras RLS conforme descritas (admin apenas em `reviews`, todos em `comments`).
+- Teste o front‑end localmente para garantir que os dados são exibidos.
+- Faça commit e push para o GitHub, ative GitHub Pages.
+
+---
+
+**Observação**: Não incluí os valores reais de `SUPABASE_URL` e `SUPABASE_ANON_KEY`; substitua-os antes de rodar o site.
