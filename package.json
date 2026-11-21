@@ -1,0 +1,11 @@
+{
+  "name": "avaliador-midias",
+  "version": "1.0.0",
+  "scripts": {
+    "serve": "python -m http.server 8000",
+    "vite": "vite"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

@@ -1,0 +1,92 @@
+# create.html
+// Full form for creating a review
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adicionar Avaliação</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header>
+    <a href="../index.html">← Voltar</a>
+    <h1>Adicionar Avaliação</h1>
+  </header>
+  <main>
+    <form id="reviewForm">
+      <label for="category">Categoria:</label>
+      <select id="category" name="category" required>
+        <option value="games" selected>Jogos</option>
+        <option value="movies">Filmes</option>
+        <option value="series">Séries</option>
+        <option value="anime">Animes</option>
+        <option value="reading">Leitura</option>
+      </select>
+
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="ano">Ano:</label>
+      <input type="number" id="ano" name="ano" required>
+
+      <label for="idioma_assistido">Idioma Assistido:</label>
+      <input type="text" id="idioma_assistido" name="idioma_assistido" required>
+
+      <label for="assistido_em">Assistido em (ano):</label>
+      <input type="number" id="assistido_em" name="assistido_em" required>
+
+      <label for="grafico_animacao">Gráfico / Animação:</label>
+      <input type="number" id="grafico_animacao" name="grafico_animacao" required>
+
+      <label for="estetica">Estética (0‑10):</label>
+      <input type="number" id="estetica" name="estetica" min="0" max="10" required>
+
+      <label for="som_efeito_sonoro">Som/Efeito Sonoro (0‑10):</label>
+      <input type="number" id="som_efeito_sonoro" name="som_efeito_sonoro" min="0" max="10" required>
+
+      <label for="vozes">Vozes (0‑10):</label>
+      <input type="number" id="vozes" name="vozes" min="0" max="10" required>
+
+      <label for="apresentacao">Apresentação (0‑10):</label>
+      <input type="number" id="apresentacao" name="apresentacao" min="0" max="10" required>
+
+      <label for="roteiro_historia">Roteiro/História (0‑10):</label>
+      <input type="number" id="roteiro_historia" name="roteiro_historia" min="0" max="10" required>
+
+      <label for="personagens">Personagens (0‑10):</label>
+      <input type="number" id="personagens" name="personagens" min="0" max="10" required>
+
+      <label for="ambiente">Ambiente (0‑10):</label>
+      <input type="number" id="ambiente" name="ambiente" min="0" max="10" required>
+
+      <label for="obs">Observações:</label>
+      <textarea id="obs" name="obs" rows="4" cols="50"></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+  </main>
+  <script type="module" src="assets/js/app.js"></script>
+  <script type="module">
+    import { addReview } from './assets/js/app.js';
+    const form = document.getElementById('reviewForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const review = {};
+      for (const [key, value] of formData.entries()) {
+        review[key] = value;
+      }
+      try {
+        await addReview(review);
+        alert('Avaliação enviada!');
+        form.reset();
+      } catch (err) {
+        console.error(err);
+        alert('Erro ao enviar: ' + err.message);
+      }
+    });
+  </script>
+</body>
+</html>

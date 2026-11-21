@@ -1,3 +1,6 @@
+// movies.html – rendering logic (complete rewrite)
+// The page now displays title, year, rating, and observations.
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -8,7 +11,7 @@
 </head>
 <body>
   <header>
-    <a href="index.html">← Voltar</a>
+    <a href="../index.html">← Voltar</a>
     <h1>Filmes</h1>
   </header>
   <main id="content">
@@ -16,7 +19,7 @@
   </main>
   <script type="module" src="assets/js/app.js"></script>
   <script type="module">
-    import { fetchReviews } from 'assets/js/app.js';
+    import { fetchReviews } from './assets/js/app.js';
     const content = document.getElementById('content');
     async function load() {
       try {
@@ -29,7 +32,7 @@
         const ul = document.createElement('ul');
         reviews.forEach(r => {
           const li = document.createElement('li');
-          li.innerHTML = `<strong>${r.title}</strong> - ${r.rating}★<br>${r.comment}`;
+          li.innerHTML = `<strong>${r.nome}</strong> (${r.ano}) - ${r.estetica}★<br>${r.obs}`;
           ul.appendChild(li);
         });
         content.appendChild(ul);
